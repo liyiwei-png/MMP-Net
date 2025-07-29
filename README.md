@@ -13,7 +13,10 @@ Tested on 5 medical image segmentation datasets:
 ## Setup
 
 ```bash
-pip install torch torchvision numpy opencv-python pillow scikit-learn matplotlib
+conda create -n mmpnet python=3.8
+conda activate mmpnet
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
+pip install numpy opencv-python pillow scikit-learn matplotlib
 ```
 
 ## Dataset Structure
@@ -36,14 +39,14 @@ datasets/
 ## Usage
 
 1. **Configure**: Modify dataset paths and parameters in `Config.py`
-2. **Train**: `python train_model.py`
-3. **Test**: `python test_model.py`
+2. **Train**: `python Experiment/train_model.py`
+3. **Test**: `python Experiment/test_model.py`
 
 ## Key Parameters
 
 - Learning rate: 1e-3
 - Batch size: 16
-- Early stopping patience: 130
+- Early stopping patience: 100
 - Dropout rate: 0.1
 - Weight decay: 1e-5
 
@@ -52,3 +55,11 @@ datasets/
 - **MKC**: Multi-scale feature extraction with different kernel sizes
 - **PGLC**: Phase-rotation and Laplacian convolution for edge enhancement  
 - **MLCA**: Multi-Layer-Guided Channel Attention Module
+## Citation
+If you find our repo useful for your research, please consider citing our article.This article has been submitted for peer-review in the journal called The visual computer.
+@ARTICLE{40046799,
+  author  = {Yiwei Li, Shiren Li, Maksim Davydov, Serestina Viriri, Irsa Talib, Zhihao Yuan, Guangguang Yang},
+  journal = {The Viusal Computer}
+  title   = {Enhancing Medical Image Segmentation with the Modification of U-Shaped Network},
+  year    = {2025}
+}
