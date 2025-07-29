@@ -66,5 +66,4 @@ If you find our repo useful for your research, please consider citing our articl
   journal = {The Visual Computer},
   title = {Enhancing Medical Image Segmentation with the Modification of U-Shaped Network},
   year = {2025},
-  note = {Under review}
 }
