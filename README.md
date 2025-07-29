@@ -60,9 +60,11 @@ datasets/
 
 If you find our repo useful for your research, please consider citing our article. This article has been submitted for peer-review in the journal "The Visual Computer".
 
+```bibtex
 @article{li2025enhancing,
   author = {Li, Yiwei and Li, Shiren and Davydov, Maksim and Viriri, Serestina and Talib, Irsa and Yuan, Zhihao and Yang, Guangguang},
   journal = {The Visual Computer},
   title = {Enhancing Medical Image Segmentation with the Modification of U-Shaped Network},
   year = {2025},
+  note = {Under review}
 }
