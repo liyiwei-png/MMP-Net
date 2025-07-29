@@ -39,8 +39,12 @@ datasets/
 ## Usage
 
 1. **Configure**: Modify dataset paths and parameters in `Config.py`
-2. **Train**: `python Experiment/train_model.py`
-3. **Test**: `python Experiment/test_model.py`
+
+2. **Train**: 
+```bash
+python Experiment/train_model.py
+python Experiment/test_model.py
+
 
 ## Key Parameters
 
