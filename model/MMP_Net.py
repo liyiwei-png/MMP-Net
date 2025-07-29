@@ -149,7 +149,7 @@ class MKCBlock(torch.nn.Module):
         self.mkc = MKC(c1, c2, expansion=e, branches=N)
         self.add = shortcut and c1 == c2
     def forward(self, x):
-        return x + self.mck(x) if self.add else self.mkc(x)
+        return x + self.mkc(x) if self.add else self.mkc(x)
 class MKC_Layer(torch.nn.Module):
     def __init__(self, in_chnl, out_chnl, r=3, dropout_rate=0.1):
         super().__init__()
@@ -320,7 +320,7 @@ class Conv2d_channel(torch.nn.Module):
         x = self.activation(x)
         x = self.dropout(x)
         return self.sqe(x)
-class MFA(torch.nn.Module):
+class MLCA(torch.nn.Module):
     def __init__(self, in_filters1, in_filters2, in_filters3, in_filters4, dropout_rate=0.2):
         super().__init__()
         self.transform1 = SEConvBlock(in_filters1, in_filters1, (1, 1), dropout_rate=dropout_rate)
@@ -359,10 +359,10 @@ class MFA(torch.nn.Module):
         out3 = self.scale_attention[2](out3 + x3)
         out4 = self.scale_attention[3](out4 + x4)
         return out1, out2, out3, out4
-class MSFA_block(torch.nn.Module):
+class MLCA_block(torch.nn.Module):
     def __init__(self, in_filters1, in_filters2, in_filters3, in_filters4, dropout_rate=0.2):
         super().__init__()
-        self.mfa = MFA(in_filters1, in_filters2, in_filters3, in_filters4, dropout_rate)
+        self.mlca = MLCA(in_filters1, in_filters2, in_filters3, in_filters4, dropout_rate)
         self.g1 = torch.nn.Sequential(
             torch.nn.Conv2d(in_filters1, in_filters1, kernel_size=1),
             torch.nn.BatchNorm2d(in_filters1, momentum=0.01),
@@ -392,7 +392,7 @@ class MSFA_block(torch.nn.Module):
             x3 = x3 + t3 * self.g3(x3)
         if t4 is not None:
             x4 = x4 + t4 * self.g4(x4)
-        return self.mfa(x1, x2, x3, x4)
+        return self.mlca(x1, x2, x3, x4)
 class MMP_Net(torch.nn.Module):
     def __init__(self, n_channels, n_classes, n_filts=32, dropout_rate=0.2):
         super().__init__()
@@ -408,9 +408,9 @@ class MMP_Net(torch.nn.Module):
         self.pglc2 = PGLC(n_filts * 2, 3, dropout_rate=dropout_rate)
         self.pglc3 = PGLC(n_filts * 4, 2, dropout_rate=dropout_rate)
         self.pglc4 = PGLC(n_filts * 8, 1, dropout_rate=dropout_rate)
-        self.msfa1 = MSFA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
-        self.msfa2 = MSFA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
-        self.msfa3 = MSFA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
+        self.mlca1 = MLCA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
+        self.mlca2 = MLCA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
+        self.mlca3 = MLCA_block(n_filts, n_filts * 2, n_filts * 4, n_filts * 8, dropout_rate=dropout_rate)
         self.up6 = torch.nn.ConvTranspose2d(n_filts * 16, n_filts * 8, kernel_size=2, stride=2)
         self.cnv6 = MKC_Layer(n_filts * 8 + n_filts * 8, n_filts * 8, r=3, dropout_rate=dropout_rate)
         self.up7 = torch.nn.ConvTranspose2d(n_filts * 8, n_filts * 4, kernel_size=2, stride=2)
@@ -439,9 +439,9 @@ class MMP_Net(torch.nn.Module):
         x5 = self.cnv4(x4p)
         x5 = self.pglc4(x5)
         x5p = self.pool(x5)
-        x2, x3, x4, x5 = self.msfa1(x2, x3, x4, x5)
-        x2, x3, x4, x5 = self.msfa2(x2, x3, x4, x5)
-        x2, x3, x4, x5 = self.msfa3(x2, x3, x4, x5)
+        x2, x3, x4, x5 = self.mlca1(x2, x3, x4, x5)
+        x2, x3, x4, x5 = self.mlca2(x2, x3, x4, x5)
+        x2, x3, x4, x5 = self.mlca3(x2, x3, x4, x5)
         x6 = self.cnv5(x5p)
         x7 = self.up6(x6)
         x7 = self.cnv6(torch.cat([x7, x5], dim=1))
