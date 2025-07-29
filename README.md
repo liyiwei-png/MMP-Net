@@ -52,4 +52,4 @@ datasets/
 
 - **MKC**: Multi-scale feature extraction with different kernel sizes
 - **PGLC**: Phase-rotation and Laplacian convolution for edge enhancement  
-- **MSFA**: Multi-scale feature fusion with attention mechanisms
+- **MLCA**: Multi-Layer-Guided Channel Attention Module
