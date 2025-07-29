@@ -1,6 +1,5 @@
 # MMP-Net
-
-Enhancing Medical Image Segmentation with the Modification of U-Shaped Network
+Medical image segmentation is a key technology in computer-aided diagnosis systems, and the accuracy of the existing segmentation models cannot meet the need in practical applications. To improve the accuracy of the model,this paper proposes a novel U-shaped network called MMP-Net, meticulously crafted for medical image segmentation tasks. The MMP-Net incorporates three core modules: the multi-kernel convolution (MKC) module, which enhances the multi-receptive-field representation of the model; the multi-layer-guided channel attention (MLCA) module, which combines the features from different encoder layers and the combined features are used to guide the channel attention;the phase-guided Laplacian convolution (PGLC) module, which leverages the boundary sensitivity of Laplacian convolution kernels to effectively capture edge gradient changes and local detail textures in images. The proposed MMP-Net has been validated with two metrics (Dice and HD95) in five public medical image datasets (ISIC2017, ISIC2018, BUSI, COVID, PH2). Experimental results show that the proposed MMP-Net outperforms other popular models in all five datasets with minimal model parameters and computational cost, which are 2.03M and 5.3G respectively. This achievement offers an efficient and accurate solution for medical image segmentation tasks, making it particularly suitable for mobile healthcare and edge computing scenarios. 
 
 ## Datasets
 
