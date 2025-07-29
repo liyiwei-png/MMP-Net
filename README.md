@@ -43,11 +43,12 @@ datasets/
 2. **Train**: 
 ```bash
 python Experiment/train_model.py
+```
 
 3. **Test**: 
 ```bash
 python Experiment/test_model.py
-
+```
 
 ## Key Parameters
 
