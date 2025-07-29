@@ -55,11 +55,14 @@ datasets/
 - **MKC**: Multi-scale feature extraction with different kernel sizes
 - **PGLC**: Phase-rotation and Laplacian convolution for edge enhancement  
 - **MLCA**: Multi-Layer-Guided Channel Attention Module
+
 ## Citation
-If you find our repo useful for your research, please consider citing our article.This article has been submitted for peer-review in the journal called The visual computer.
-@ARTICLE{40046799,
-  author  = {Yiwei Li, Shiren Li, Maksim Davydov, Serestina Viriri, Irsa Talib, Zhihao Yuan, Guangguang Yang},
-  journal = {The Viusal Computer}
-  title   = {Enhancing Medical Image Segmentation with the Modification of U-Shaped Network},
-  year    = {2025}
+
+If you find our repo useful for your research, please consider citing our article. This article has been submitted for peer-review in the journal "The Visual Computer".
+
+@article{li2025enhancing,
+  author = {Li, Yiwei and Li, Shiren and Davydov, Maksim and Viriri, Serestina and Talib, Irsa and Yuan, Zhihao and Yang, Guangguang},
+  journal = {The Visual Computer},
+  title = {Enhancing Medical Image Segmentation with the Modification of U-Shaped Network},
+  year = {2025},
 }
